@@ -1,0 +1,7 @@
+function output_arg = kernel( u )
+%KERNEL Summary of this function goes here
+%   Detailed explanation goes here
+
+    output_arg = (sqrt(2*PI)^-1)*
+end
+

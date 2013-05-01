@@ -1,0 +1,22 @@
+function y = quantiles( d, input )
+%QUANTILES Summary of this function goes here
+%   Detailed explanation goes here
+  d = sort(d, 'ascend');
+  n_1 = d.length - 1;
+  for i = 1: length(d)
+  end
+  return quantiles.map(function(q) {
+    if (q === 0) return d[0];
+    else if (q === 1) return d[n_1];
+
+    var index = 1 + q * n_1,
+        lo = Math.floor(index),
+        h = index - lo,
+        a = d[lo - 1];
+
+    return h === 0 ? a : a + h * (d[lo] - a);
+  });
+};
+
+end
+

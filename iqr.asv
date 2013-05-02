@@ -1,8 +1,0 @@
-function [ output_args = iqr( input, lo, hi )
-%IQR Interquartile range - measure of the difference between given upper and
-%   lower quartiles.
-%   Detailed explanation goes here
-
-
-end
-

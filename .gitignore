@@ -1,3 +1,4 @@
-# Autosave files #
+# Octave files #
 ##################
 *.asv
+octave-core

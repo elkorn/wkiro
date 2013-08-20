@@ -1,6 +1,5 @@
 function y = quantiles( input, qtls )
 %QUANTILES Selects specified quantiles from an array of numbers.
-%   Detailed explanation goes here
   input = sort(input, 'ascend');
   n = length(input);
   nq = length(qtls);

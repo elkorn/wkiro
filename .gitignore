@@ -2,4 +2,4 @@
 ##################
 *.asv
 octave-core
-[outdated]*
+outdated_*

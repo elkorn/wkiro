@@ -23,10 +23,12 @@ The application execution can be parameterized by the following variables:
  - One parameter vector describes the features of one training set.
     
  - The data format for the training set parameter matrix is the following:
+
 ```matlab
 [x1,y1,r1; x2,y2,r2; x3,y3,r3] % unrestricted matrix length
 ```
  - In case no value is defined for the variable, the following default is used:
+
 ```matlab
 [-15,-15,1; 15,15,1; -15,15,1; 15,-15,1];
 ```
@@ -35,6 +37,7 @@ The application execution can be parameterized by the following variables:
  - Every training set has an equal number of elements.
 
  - In case no value is defined for the variable, the following default is used:
+
 ```matlab
 20
 ```
@@ -42,8 +45,9 @@ The application execution can be parameterized by the following variables:
 - `ELEMENTS`, specifying the set of elements to classify.
  - An element is represented by a pair of coordinates.
  - The format for the data within this variable is as follows:
-```matalb
-[x1,y1; x2,y2; x3,y3;] % unrestricted matrix length
+
+```matlab
+[x1,y1; x2,y2; x3,y3] % unrestricted matrix length
 ```
  - In case no value is defined for the variable, a set of 100 elements generated randomly within a circular area cenetered at `(0,0)` and with a radius of `7` is used as the default.
 

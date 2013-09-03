@@ -14,7 +14,14 @@ function [ output_args ] = generateRandomCircleSet( xc, yc, radius, quantity, cl
     I = find(sqrt(x.^2 + y.^2)<=radius);
     x = x(I(1:quantity)) + xc;
     y = y(I(1:quantity)) + yc;
-    output_args = horzcat(x,y);
+    if (nargin > 4)
+        c = ones(1,quantity) * class;
+        c = transpose(c);
+        output_args = horzcat(x,y,c);
+    else
+        output_args = horzcat(x,y);
+    end
+    
 
     % for t=1:quantity
     %     [x y] = randomInCircle(x,y,r);

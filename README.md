@@ -12,7 +12,7 @@ Command Window.
 
 The application execution can be parameterized by the following variables:
 
-- `LEARNING_SET_PARAMETERS`, specifying a matrix of parameter vectors for each training dataset. 
+- `TRAINING_SET_PARAMETERS`, specifying a matrix of parameter vectors for each training dataset. 
  - Generated sets can be adjusted in the following dimensions:
    - X,Y coordinates of the training set center,
    - radius of the training set.
@@ -33,7 +33,7 @@ The application execution can be parameterized by the following variables:
 [-15,-15,1; 15,15,1; -15,15,1; 15,-15,1];
 ```
 
-- `LEARNING_SET_ELEMENTS_COUNT`, specifying the quantity of elements forming each training set.
+- `TRAINING_SET_ELEMENTS_COUNT`, specifying the quantity of elements forming each training set.
  - Every training set has an equal number of elements.
 
  - In case no value is defined for the variable, the following default is used:

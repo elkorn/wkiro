@@ -86,23 +86,23 @@ function K_uniform(u) {
  * @param  {Array[Array[Number]]} arr           The collection to which the processed element belongs.
  *                                              Used for calculating bandwidth for individual features.
  * @param  {Array[Number]} element              The element to calculate the probability for.
- * @param  {Array[Array[Number]]} learningSet   A set of elements used to train the classifier.
+ * @param  {Array[Array[Number]]} trainingSet   A set of elements used to train the classifier.
  */
 
-function discriminateFunction(kernel, _class, arr, element, learningSet) {
-    var n_i = learningSet.length;
+function discriminateFunction(kernel, _class, arr, element, trainingSet) {
+    var n_i = trainingSet.length;
     var numberOfFeatures = getNumberOfFeatures(element);
     var result = 1;
     for (var f = 0; f < numberOfFeatures; ++f) {
         var data = getFeature(arr, f);
         var bandwidth = selectBandwidthFor(data);
 
-        var learningFeatures = getFeature(learningSet, f);
+        var trainingFeatures = getFeature(trainingSet, f);
         var feature = element[f];
 
         var sum = 0;
         for (var i = 0; i < n_i; ++i) {
-            sum += kernel((feature - learningFeatures[i]) / bandwidth);
+            sum += kernel((feature - trainingFeatures[i]) / bandwidth);
         }
 
         result *= sum / bandwidth;
@@ -118,28 +118,28 @@ function discriminateFunction(kernel, _class, arr, element, learningSet) {
  * @param  {Array[Array[Number]]} arr           The collection to which the processed element belongs.
  *                                              Used for calculating bandwidth for individual features.
  * @param  {Array[Number]} element              The element to classify.
- * @param  {Array[Array[Number]]} learningSet   A set of elements used to train the classifier.
+ * @param  {Array[Array[Number]]} trainingSet   A set of elements used to train the classifier.
  *
  * @return {Number}                             The class to which the processed element belongs.
  */
 
-function psi(kernel, classes, arr, element, learningSet) {
+function psi(kernel, classes, arr, element, trainingSet) {
     var results = [];
     classes.forEach(function() {
         results.push(Math.min());
     });
 
     for (var i = 0; i < classes.length; i++) {
-        var learningSetForClassI = learningSet.filter(function(element) {
+        var trainingSetForClassI = trainingSet.filter(function(element) {
             return element["class"] === classes[i];
         });
-        var tmpResultForClassI = discriminateFunction(kernel, classes[i], arr, element, learningSetForClassI);
+        var tmpResultForClassI = discriminateFunction(kernel, classes[i], arr, element, trainingSetForClassI);
         for (var j = 0; j < classes.length; j++) {
-            var learningSetForClassJ = learningSet.filter(function(element) {
+            var trainingSetForClassJ = trainingSet.filter(function(element) {
                 return element["class"] === classes[i];
             });
 
-            var tmpResultForClassJ = discriminateFunction(kernel, classes[j], arr, element, learningSetForClassJ);
+            var tmpResultForClassJ = discriminateFunction(kernel, classes[j], arr, element, trainingSetForClassJ);
             if (tmpResultForClassI > tmpResultForClassJ) {
                 if (result[i] < tmpResultForClassI) {
                     result[i] = tmpResultForClassI;
@@ -157,10 +157,10 @@ function psi(kernel, classes, arr, element, learningSet) {
  * @param  {Array[Number]} classes              The collection of classes to be considered while classifying the element.
  * @param  {Array[Array[Number]]} elements      The collection to which the processed element belongs.
  *                                              Used for calculating bandwidth for individual features.
- * @param  {Array[Array[Number]]} learningSet   A set of elements used to train the classifier.
+ * @param  {Array[Array[Number]]} trainingSet   A set of elements used to train the classifier.
  */
 
-function classifyElements(kernel, classes, elements, learningSet) {
+function classifyElements(kernel, classes, elements, trainingSet) {
     var result = elements.map(function(element) {
         return {
             features: element
@@ -175,7 +175,7 @@ function classifyElements(kernel, classes, elements, learningSet) {
      */
 
     result.forEach(function(element, index) {
-        result[index]["class"] = psi(kernel, classes, elements, element, learningSet);
+        result[index]["class"] = psi(kernel, classes, elements, element, trainingSet);
     });
 }
 
@@ -240,7 +240,7 @@ rnd = [
 
 
 
-var LEARNING_SET = [{
+var TRAINING_SET = [{
         features: [-4.887, -4.489],
         "class": 1
     }, {

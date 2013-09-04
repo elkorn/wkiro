@@ -2,21 +2,21 @@
 
 clear labels;
 
-% if (~exist('LEARNING_SET', 'var'))
+% if (~exist('TRAINING_SET', 'var'))
 %     run('createLearningSet');
 % end
 
-if(~exist('LEARNING_SET_PARAMETERS', 'var'))
-    LEARNING_SET_PARAMETERS = [-15,0,1; 15,0,1; 0,15,1; 0,-15,1];
+if(~exist('TRAINING_SET_PARAMETERS', 'var'))
+    TRAINING_SET_PARAMETERS = [-15,0,1; 15,0,1; 0,15,1; 0,-15,1];
 end
 
-NumberOfClasses = length(LEARNING_SET_PARAMETERS);
+NumberOfClasses = length(TRAINING_SET_PARAMETERS);
 
-if(~exist('LEARNING_SET_ELEMENTS_COUNT','var'))
-    LEARNING_SET_ELEMENTS_COUNT = 20;
+if(~exist('TRAINING_SET_ELEMENTS_COUNT','var'))
+    TRAINING_SET_ELEMENTS_COUNT = 20;
 end
 
-LEARNING_SET = generateRandomTrainingSet(LEARNING_SET_PARAMETERS, LEARNING_SET_ELEMENTS_COUNT);
+TRAINING_SET = generateRandomTrainingSet(TRAINING_SET_PARAMETERS, TRAINING_SET_ELEMENTS_COUNT);
 
 if(~exist('ELEMENTS', 'var'))
     ELEMENTS = generateRandomCircleSet(0,0,27, 1000);
@@ -28,27 +28,27 @@ end
 
 % n=3; %number of decimal places
 
-result = classifyElements(KERNEL, ELEMENTS, LEARNING_SET);
+result = classifyElements(KERNEL, ELEMENTS, TRAINING_SET);
 
-for i=1:1:length(LEARNING_SET)
+for i=1:1:length(TRAINING_SET)
     % Klasa %d (zbiÃ³r uczÂ¹cy)
-%     LEARNING_SET(i,end) = LEARNING_SET(i,end) + NumberOfClasses;
+%     TRAINING_SET(i,end) = TRAINING_SET(i,end) + NumberOfClasses;
 end
 
 result = sortrows(result,3);
 
-for i=1:1:length(LEARNING_SET)
-    labels{i} = sprintf('Zbiór ucz¹cy dla klasy %d', LEARNING_SET(i,end));
+for i=1:1:length(TRAINING_SET)
+    labels{i} = sprintf('Zbiór ucz¹cy dla klasy %d', TRAINING_SET(i,end));
 end
 
 for i=1:1:length(result)
     if(result(i,end) < 0)
-        labels{length(LEARNING_SET)+i} = sprintf('Elementy nieprzypisane');
+        labels{length(TRAINING_SET)+i} = sprintf('Elementy nieprzypisane');
     else
-        labels{length(LEARNING_SET)+i} = sprintf('Elementy w klasie %d', result(i,end));
+        labels{length(TRAINING_SET)+i} = sprintf('Elementy w klasie %d', result(i,end));
     end
 end
 
 labels = transpose(labels);
-result = [LEARNING_SET; result];
+result = [TRAINING_SET; result];
 gscatter(result(:,1), result(:,2), labels);

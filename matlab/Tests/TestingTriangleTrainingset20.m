@@ -1,11 +1,5 @@
 TRAINING_SET_PARAMETERS = [-3,0,1; 3,0,1; 0,3,1; 0,-3,1];
 
-NumberOfClasses = length(TRAINING_SET_PARAMETERS);
-
 TRAINING_SET_ELEMENTS_COUNT = 20;
-
-TRAINING_SET = generateRandomTrainingSet(TRAINING_SET_PARAMETERS, TRAINING_SET_ELEMENTS_COUNT);
-
-ELEMENTS = generateRandomCircleSet(0,0,7, 1000);
 
 KERNEL = @kernel_triangle;
